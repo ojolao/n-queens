@@ -79,9 +79,6 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      //giving rowIndex is an array
-      //iterate through rowIndex
-      console.log(rowIndex);
       var indices = [];
       var idx = rowIndex.indexOf(1);
       if (idx === -1) {
@@ -100,7 +97,6 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      /*for (var i = 0; i < this.attributes.n; i++) {*/
       for (var i = 0; i < this.attributes.n; i++) {
         if (this.hasRowConflictAt(this.attributes[i]) === true) {
           return true;
@@ -116,11 +112,26 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      var colArray = [];
+      for (var i = 0; i < this.attributes.n; i++) {
+        colArray.push(this.get([i])[colIndex]);
+      }
+      if (this.hasRowConflictAt(colArray) === true) {
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      for (var i = 0; i < this.attributes.n; i++) {
+        if (this.hasColConflictAt(i) === true) {
+          return true;
+        }
+      }
+      //Declare a column array
+      // we iterate through this.attribute using this.attribute.n as our length
+        //push the value of the same index into our column array
       return false; // fixme
     },
 
