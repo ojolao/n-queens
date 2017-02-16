@@ -114,7 +114,7 @@
     hasColConflictAt: function(colIndex) {
       var colArray = [];
       for (var i = 0; i < this.attributes.n; i++) {
-        colArray.push(this.get([i])[colIndex]);
+        colArray.push(this.get(i)[colIndex]);
       }
       if (this.hasRowConflictAt(colArray) === true) {
         return true;
@@ -129,9 +129,6 @@
           return true;
         }
       }
-      //Declare a column array
-      // we iterate through this.attribute using this.attribute.n as our length
-        //push the value of the same index into our column array
       return false; // fixme
     },
 
@@ -142,11 +139,42 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      var diagonalArray = [];
+      var j = 0;
+      if (majorDiagonalColumnIndexAtFirstRow < 0) {
+        while (majorDiagonalColumnIndexAtFirstRow <= 0) {
+          j++;
+          majorDiagonalColumnIndexAtFirstRow++;
+        }
+        for (var j; j < this.attibutes.n; j++) {
+          diagonalArraydiagonalArray.push(this.get(j)[majorDiagonalColumnIndexAtFirstRow]);
+          majorDiagonalColumnIndexAtFirstRow++;
+        }
+      } 
+      // if //while (majorDiagonalColumnIndexAtFirstRow < 0) { 
+        //j++
+        //majorDiagonal...++}
+      for (var i = 0; i < this.attributes.n; i++) {
+        var diagonal = this.get(i)[majorDiagonalColumnIndexAtFirstRow];
+        if (diagonal !== undefined) {
+          diagonalArray.push(this.get(i)[majorDiagonalColumnIndexAtFirstRow]);
+          majorDiagonalColumnIndexAtFirstRow++;
+          console.log(diagonalArray);
+        }
+      }
+      if (this.hasRowConflictAt(diagonalArray) === true) {
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      for (var i = 0; i < this.attributes.n; i++) {
+        if (this.hasMajorDiagonalConflictAt(i) === true) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
