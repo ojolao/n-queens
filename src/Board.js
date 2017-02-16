@@ -79,12 +79,34 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //giving rowIndex is an array
+      //iterate through rowIndex
+      console.log(rowIndex);
+      var indices = [];
+      var idx = rowIndex.indexOf(1);
+      if (idx === -1) {
+        return false;
+      } else {
+        while (idx !== -1) {
+          indices.push(idx);
+          idx = rowIndex.indexOf(1, idx + 1);
+        }
+        if (indices.length > 1) {
+          return true;
+        }
+        return false;
+      }
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      /*for (var i = 0; i < this.attributes.n; i++) {*/
+      for (var i = 0; i < this.attributes.n; i++) {
+        if (this.hasRowConflictAt(this.attributes[i]) === true) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
