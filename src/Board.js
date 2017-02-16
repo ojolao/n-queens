@@ -79,8 +79,30 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      var indices = [];
+      var sum = 0;
+      for (var i = 0; i < this.attributes.n; i++) {
+        if (rowIndex[i] === 1) {
+          sum++;
+        }
+      }
+      return sum > 1;
+
+
+
+// another solution;
+//       var sum = 0;
+//       for (var i = 0; i < this.attributes.n; i++) {
+//         if (this.rows()[i][majorDiagonalColumnIndexAtFirstRow + i] === 1) {
+//           sum++;
+//         }
+//       }
+//       if (sum > 1) {
+//         return true;
+//       }
+//       return false;
+    /*  var indices = [];
       var idx = rowIndex.indexOf(1);
+      console.log(idx);
       if (idx === -1) {
         return false;
       } else {
@@ -92,7 +114,7 @@
           return true;
         }
         return false;
-      }
+      }*/
     },
 
     // test if any rows on this board contain conflicts
