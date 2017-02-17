@@ -36,7 +36,8 @@ window.countNRooksSolutions = function(n) {
   /*
   How do we find all NRooks solutions for N? Having found one N-Rooks solution, how do we find all NRooks solutions for N?
   Is there a relationship between what we are iterating? Yes--if we place it in one row, then the rest of that row, and the rest of
-  that column is crossed out
+  that column is crossed out. so it's where we start out. So if we start out at 0, we get one set of solutions, if we start out at 1, we
+  get another set of solutions
   Given N, 
   function that takes a board as an imput,
         place a piece,  
@@ -61,10 +62,24 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  var solution = undefined; //fixme
+  var solution = new Board({n: n});
+  for (var currentRow = 0; currentRow < n; currentRow++) {
+    solution.togglePiece(currentRow, currentCol);
+    if (solution.hasAnyQueensConflicts()) {
+      solution.togglePiece(currentRow, currentCol);
+    }
+    for (var currentCol = 0; currentCol < n; currentCol++) {
+      solution.togglePiece(currentRow, currentCol);
+      if (solution.hasAnyQueensConflicts()) {
+        solution.togglePiece(currentRow, currentCol);
+      }
+    }
+  }
+  console.log(solution.rows());
+  return solution.rows();
 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
-  return solution;
+
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
