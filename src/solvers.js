@@ -16,15 +16,44 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
-
+  var solution = new Board({n: n});
+  for (var currentRow = 0; currentRow < n; currentRow++) {
+    for (var currentCol = 0; currentCol < n; currentCol++) {
+      solution.togglePiece(currentRow, currentCol);
+      if (solution.hasAnyRooksConflicts()) {
+        solution.togglePiece(currentRow, currentCol);
+      }
+    }
+  }
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return solution;
+  return solution.rows();
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0; //fixme
+
+  /*
+  How do we find all NRooks solutions for N? Having found one N-Rooks solution, how do we find all NRooks solutions for N?
+  Is there a relationship between what we are iterating? Yes--if we place it in one row, then the rest of that row, and the rest of
+  that column is crossed out
+  Given N, 
+  function that takes a board as an imput,
+        place a piece,  
+       if (this board has no conflicts and) all the pieces have been placed
+          return count;
+        if all the pieces have not been placed, 
+          place the next piece
+          find all the number of solutions with the next piece placed
+
+
+
+       while (it runs findNRooksSolution on our board)
+        sum++
+        togglePiece
+
+  output is to increment solution count
+  */
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;

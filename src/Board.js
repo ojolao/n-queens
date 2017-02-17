@@ -102,7 +102,6 @@
 //       return false;
     /*  var indices = [];
       var idx = rowIndex.indexOf(1);
-      console.log(idx);
       if (idx === -1) {
         return false;
       } else {
